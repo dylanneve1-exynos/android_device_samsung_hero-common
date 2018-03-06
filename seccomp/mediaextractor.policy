@@ -1,0 +1,12 @@
+# device specific syscalls
+getdents64: 1
+gettid: 1
+geteuid32: 1
+getgid32: 1
+getegid32: 1
+getpid: 1
+uname: 1
+nanosleep: 1
+_llseek: 1
+pread64: 1
+readlinkat: 1

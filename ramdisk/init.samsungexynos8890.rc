@@ -1,5 +1,4 @@
 import init.samsungexynos8890.usb.rc
-import init.baseband.rc
 import init.rilcommon.rc
 import init.wifi.rc
 import init.gps.rc
@@ -126,6 +125,9 @@ on post-fs-data
     chown system radio /sys/class/power_supply/battery/batt_self_discharging_control
     chown system radio /sys/class/power_supply/battery/batt_inbat_wireless_cs100
 
+# Permissions for PCIe
+    chown system system /sys/devices/15660000.pcie0/pcie_sysfs
+
 #Private Mode
     mkdir /mnt/shell/privatemode 0700 system system
     mkdir /storage/Private 0000 system system
@@ -149,6 +151,23 @@ on boot
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
+
+    # Permissions for NAD
+    symlink /dev/block/platform/155a0000.ufs/by-name/NAD_REFER /dev/block/NAD_REFER
+    chown system radio /sys/class/sec/sec_nad/nad_stat
+    chmod 0664 /sys/class/sec/sec_nad/nad_stat
+    chown system radio /sys/class/sec/sec_nad/nad_erase
+    chmod 0664 /sys/class/sec/sec_nad/nad_erase
+    chown system radio /sys/class/sec/sec_nad/nad_acat
+    chmod 0664 /sys/class/sec/sec_nad/nad_acat
+    chown system radio /sys/class/sec/sec_nad/nad_dram
+    chmod 0664 /sys/class/sec/sec_nad/nad_dram
+    chown system radio /sys/class/sec/sec_nad/nad_all
+    chmod 0664 /sys/class/sec/sec_nad/nad_all
+    chown system radio /sys/class/sec/sec_nad/nad_support
+    chmod 0664 /sys/class/sec/sec_nad/nad_support
+    chown system radio /dev/block/NAD_REFER
+    chmod 0664 /dev/block/NAD_REFER
 
     # PMS DVFS
     chown system system /sys/power/cpuhotplug/enabled
@@ -412,6 +431,8 @@ on fs
     chown system media_rw /sys/class/lcd/panel/adaptive_control
     chown system media_rw /sys/class/lcd/panel/resolution
     chown system system /sys/class/lcd/panel/SVC_OCTA
+    chown system system /sys/class/lcd/panel/dpui
+    chown system system /sys/class/lcd/panel/dpui_dbg
 
 # Permissions for MDNIE
     chown system media_rw /sys/class/mdnie/mdnie/mode
@@ -423,6 +444,7 @@ on fs
     chown system system /sys/class/mdnie/mdnie/hdr
     chown system system /sys/class/mdnie/mdnie/night_mode
     chown system system /sys/class/mdnie/mdnie/whiteRGB
+    chown system system /sys/class/mdnie/mdnie/color_lens
 
 # Permissions for System LSI NFC
 # NFC : Permissions for NFC

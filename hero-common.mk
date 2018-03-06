@@ -30,6 +30,14 @@ PRODUCT_PACKAGES += \
 	ueventd.samsungexynos8890.rc \
 
 ###########################################################
+### HIDL base for mr0 blobs
+###########################################################
+PRODUCT_PACKAGES += \
+	android.hidl.base@1.0 \
+	android.hidl.manager@1.0 \
+	android.hidl.manager@1.0-java
+
+###########################################################
 ### PERMISSONS
 ###########################################################
 

@@ -50,8 +50,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	media.stagefright.legacyencoder=1 \
 	media.stagefright.less-secure=1 \
 	sys.use_fifo_ui=1 \
-	ro.telephony.mms_data_profile=5
+	ro.telephony.mms_data_profile=5 \
+	persist.media.treble_omx=false
 
 # sdcardfs
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sys.sdcardfs=false
+
+# USB
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.adb.secure=0
